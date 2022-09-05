@@ -1,0 +1,7 @@
+name: DynamicWeather
+version: '${project.version}'
+main: me.beary.DynamicWeather
+api-version: 1.19
+commands:
+  dynamicweather:
+    description: DynamicWeather Command
