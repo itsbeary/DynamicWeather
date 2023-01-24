@@ -6,13 +6,13 @@ import me.beary.commands.DynamicWeatherCommand;
 import me.beary.weather.listeners.PlayerListener;
 import me.beary.weather.listeners.WeatherListener;
 import me.beary.weather.WeatherUpdate;
-import me.beary.weather.impl.Weather;
+import me.beary.weather.impl.ServerWeather;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class DynamicWeather extends JavaPlugin {
 
     @Getter @Setter
-    private Weather weather;
+    private ServerWeather weather;
 
     @Getter
     private static DynamicWeather inst;

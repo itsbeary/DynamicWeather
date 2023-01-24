@@ -1,7 +1,7 @@
 package me.beary.commands;
 
 import me.beary.DynamicWeather;
-import me.beary.weather.impl.Weather;
+import me.beary.weather.impl.ServerWeather;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -23,7 +23,7 @@ public class DynamicWeatherCommand implements CommandExecutor {
         if(args.length == 1) {
             if(args[0].equalsIgnoreCase("reload")) {
                 DynamicWeather.getInst().reloadConfig(); /* Reload config before setting new weather */
-                DynamicWeather.getInst().setWeather(new Weather(DynamicWeather.getInst().getConfig().getString("api-key"), DynamicWeather.getInst().getConfig().getString("weather-address")));
+                DynamicWeather.getInst().setWeather(new ServerWeather(DynamicWeather.getInst().getConfig().getString("api-key"), DynamicWeather.getInst().getConfig().getString("weather-address")));
                 return message + "Reloaded plugin!";
             } else if(args[0].equals("changeweather")) {
                 if(DynamicWeather.getInst().getWeather().isChangeWeather()) {
