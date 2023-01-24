@@ -21,7 +21,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 @Getter @Setter
-public class Weather {
+public class ServerWeather {
 
     /*
     *
@@ -32,7 +32,7 @@ public class Weather {
 
     ConfigReader configReader = new ConfigReader();
 
-    private World weatherWorld;
+    private World world;
 
     private String apikey;
     private String city;
@@ -42,7 +42,7 @@ public class Weather {
     private String temperature;
     private String conditions;
 
-    public Weather(String apikey, String city) {
+    public ServerWeather(String apikey, String city) {
         if(apikey == null || apikey.isEmpty() | apikey.equals("")) {
             Bukkit.getLogger().warning("Could not create Weather Connection - Invalid Api-Key!");
             Bukkit.getPluginManager().disablePlugin(Bukkit.getPluginManager().getPlugin("DynamicWeather"));
@@ -54,9 +54,9 @@ public class Weather {
             this.changeWeather = false;
             this.temperature = returnObject("$.currentConditions.temp");
             this.conditions = returnObject("$.currentConditions.conditions");
-            this.weatherWorld = Bukkit.getWorld(configReader.getWorld());
+            this.world = Bukkit.getWorld(configReader.getWorld());
 
-            weatherWorld.setStorm(isRaining());
+            world.setStorm(isRaining());
 
 
 
