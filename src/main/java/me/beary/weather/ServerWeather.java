@@ -1,4 +1,4 @@
-package me.beary.weather.impl;
+package me.beary.weather;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -8,11 +8,8 @@ import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.spi.json.GsonJsonProvider;
 import lombok.Getter;
 import lombok.Setter;
-import me.beary.DynamicWeather;
-import me.beary.util.ConfigReader;
-import me.beary.weather.WeatherUpdate;
+import me.beary.managers.ConfigManager;
 import org.bukkit.Bukkit;
-import org.bukkit.WeatherType;
 import org.bukkit.World;
 
 import java.io.IOException;
@@ -20,17 +17,18 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-@Getter @Setter
+@Getter
+@Setter
 public class ServerWeather {
 
     /*
-    *
-    * Too-Cold = 5c
-    * Too-Hot = 30c
-    *
-    *     * */
+     *
+     * Too-Cold = 5c
+     * Too-Hot = 30c
+     *
+     *     * */
 
-    ConfigReader configReader = new ConfigReader();
+    ConfigManager configReader = new ConfigManager();
 
     private World world;
 
@@ -43,7 +41,7 @@ public class ServerWeather {
     private String conditions;
 
     public ServerWeather(String apikey, String city) {
-        if(apikey == null || apikey.isEmpty() | apikey.equals("")) {
+        if (apikey == null || apikey.isEmpty() | apikey.equals("")) {
             Bukkit.getLogger().warning("Could not create Weather Connection - Invalid Api-Key!");
             Bukkit.getPluginManager().disablePlugin(Bukkit.getPluginManager().getPlugin("DynamicWeather"));
         } else {
@@ -57,7 +55,6 @@ public class ServerWeather {
             this.world = Bukkit.getWorld(configReader.getWorld());
 
             world.setStorm(isRaining());
-
 
 
         }
@@ -86,7 +83,7 @@ public class ServerWeather {
     }
 
     public boolean isRaining() {
-        if(conditions.contains("Rain")) {
+        if (conditions.contains("Rain")) {
             return true;
         }
         return false;

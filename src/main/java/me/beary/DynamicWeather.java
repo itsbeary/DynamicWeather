@@ -2,20 +2,18 @@ package me.beary;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.beary.commands.DynamicWeatherCommand;
-import me.beary.weather.listeners.PlayerListener;
-import me.beary.weather.listeners.WeatherListener;
-import me.beary.weather.WeatherUpdate;
-import me.beary.weather.impl.ServerWeather;
+import me.beary.managers.Registerer;
+import me.beary.weather.ServerWeather;
 import org.bukkit.plugin.java.JavaPlugin;
 
+@Getter
 public class DynamicWeather extends JavaPlugin {
-
-    @Getter @Setter
-    private ServerWeather weather;
 
     @Getter
     private static DynamicWeather inst;
+    private final Registerer registerer = new Registerer();
+    @Setter
+    private ServerWeather weather;
 
     // TODO Change the rain/sun status to the weather-address
     // TODO Make temperature affect player
@@ -25,14 +23,7 @@ public class DynamicWeather extends JavaPlugin {
     public void onEnable() {
         inst = this;
         saveDefaultConfig();
-        getServer().getPluginManager().registerEvents(new PlayerListener(), this);
-        getServer().getPluginManager().registerEvents(new WeatherListener(), this);
-        //weather = new Weather(getConfig().getString("api-key"), getConfig().getString("weather-address"));
-
-        WeatherUpdate weatherUpdate = new WeatherUpdate();
-        weatherUpdate.runTaskTimer(this, 0, 72000);
-
-        getCommand("dynamicweather").setExecutor(new DynamicWeatherCommand());
+        registerer.register();
     }
 
 
