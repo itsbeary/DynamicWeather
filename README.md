@@ -1,5 +1,7 @@
 # DynamicWeather #
 
+**No where near done.**
+
 Basic Weather System to link a City's Weather Conditions to a Minecraft Server
 
 * Using https://visualcrossing.com/ Weather API
