@@ -3,7 +3,6 @@ package me.beary.weather;
 import lombok.Getter;
 import lombok.Setter;
 import me.beary.DynamicWeather;
-import me.beary.managers.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import static me.beary.util.Util.getInfo;
@@ -18,27 +17,23 @@ public class ServerWeather {
 
     private boolean changeWeather;
 
-    private String temperature;
+    private double temperature;
     private String conditions;
 
     public ServerWeather(String apikey, String city) {
+        this.apikey = apikey;
+        this.city = city;
         if (apikey == null || apikey.isEmpty() | apikey.equals("")) {
             Bukkit.getLogger().warning("Could not create Weather Connection - Invalid Api-Key!");
-            Bukkit.getPluginManager().disablePlugin(Bukkit.getPluginManager().getPlugin("DynamicWeather"));
-        } else {
-            this.apikey = apikey;
-            this.city = city;
-
-
-            this.changeWeather = false;
-            this.temperature = getInfo("$.currentConditions.temp");
-            this.conditions = getInfo("$.currentConditions.conditions");
-            this.world = Bukkit.getWorld(DynamicWeather.getInst().getConfigManager().getWorld());
-
-            if(world != null)
-                world.setStorm(conditions.contains("Rain"));
-
+            return;
         }
+        this.temperature = Double.parseDouble((String) getInfo(this,"$.currentConditions.temp"));
+        this.conditions = (String) getInfo(this,"$.currentConditions.conditions");
+        this.world = Bukkit.getWorld(DynamicWeather.getInst().getConfigManager().getWorld());
+
+        if(world != null && DynamicWeather.getInst().getConfigManager().isUseTrueWeather())
+            world.setStorm(conditions.contains("Rain"));
+
     }
 
 }

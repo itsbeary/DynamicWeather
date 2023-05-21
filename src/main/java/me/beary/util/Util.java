@@ -6,7 +6,6 @@ import com.google.gson.JsonPrimitive;
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.spi.json.GsonJsonProvider;
-import me.beary.DynamicWeather;
 import me.beary.weather.ServerWeather;
 import org.bukkit.Bukkit;
 
@@ -16,8 +15,7 @@ import java.net.URL;
 
 public class Util {
 
-    public static String getInfo(String json) {
-        ServerWeather weather = DynamicWeather.getInst().getWeather();
+    public static Object getInfo(ServerWeather weather, String json) {
         if (weather.getApikey() == null || weather.getApikey().isEmpty()) {
             Bukkit.getLogger().warning("Could not create Weather Connection - Invalid Api-Key!");
             return null;

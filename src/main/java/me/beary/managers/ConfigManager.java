@@ -10,18 +10,18 @@ import me.beary.DynamicWeather;
 public class ConfigManager {
 
     private String apikey;
-    private String weatheraddress;
-    private boolean usetrueweather;
-    private boolean usetruetemperature;
-    private boolean usetruetime;
+    private String weatherAddress;
+    private boolean useTrueWeather;
+    private boolean useTrueTemperature;
+    private boolean useTrueTime;
     private String world;
 
     public ConfigManager() {
         this.apikey = DynamicWeather.getInst().getConfig().getString("api-key");
-        this.weatheraddress = DynamicWeather.getInst().getConfig().getString("weather-address");
-        this.usetrueweather = DynamicWeather.getInst().getConfig().getBoolean("use-true-weather");
-        this.usetruetemperature = DynamicWeather.getInst().getConfig().getBoolean("use-true-temperature");
-        this.usetruetime = DynamicWeather.getInst().getConfig().getBoolean("use-true-time");
+        this.weatherAddress = DynamicWeather.getInst().getConfig().getString("weather-address");
+        this.useTrueWeather = DynamicWeather.getInst().getConfig().getBoolean("use-true-weather");
+        this.useTrueTemperature = DynamicWeather.getInst().getConfig().getBoolean("use-true-temperature");
+        this.useTrueTime = DynamicWeather.getInst().getConfig().getBoolean("use-true-time");
         this.world = DynamicWeather.getInst().getConfig().getString("weather-worldname");
     }
 

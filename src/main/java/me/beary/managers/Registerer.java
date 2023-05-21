@@ -25,7 +25,7 @@ public class Registerer {
     private void startWeatherUpdate() {
         Bukkit.getScheduler().runTaskTimerAsynchronously(DynamicWeather.getInst(), () -> {
             DynamicWeather.getInst().setWeather(new ServerWeather(DynamicWeather.getInst().getConfig().getString("api-key"), DynamicWeather.getInst().getConfig().getString("weather-address")));
-        }, 0, 72000);
+        }, 72000, 72000);
     }
 
 }

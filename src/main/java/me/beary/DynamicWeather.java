@@ -13,18 +13,18 @@ public class DynamicWeather extends JavaPlugin {
     @Getter
     private static DynamicWeather inst;
     private final Registerer registerer = new Registerer();
-    private final ConfigManager configManager = new ConfigManager();
+    private ConfigManager configManager;
     @Setter
     private ServerWeather weather;
-
-    // TODO Make temperature affect player
-    // TODO Set time to the relevant time
 
     @Override
     public void onEnable() {
         inst = this;
         saveDefaultConfig();
         registerer.register();
+        this.configManager = new ConfigManager();
+        this.weather = new ServerWeather(DynamicWeather.getInst().getConfig().getString("api-key"), DynamicWeather.getInst().getConfig().getString("weather-address"));
+
     }
 
 
